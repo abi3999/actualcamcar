@@ -42,6 +42,7 @@ const RemoteVehicleControl = () => {
   };
 
   const handleControlRelease = (direction: string) => {
+    console.log(`Releasing control for: ${direction}`); // For debugging
     const topic = `userxyz/device/control/${direction}`;
     if (publishMessage(topic, '0')) {
       setActiveControls(prev => {
@@ -184,9 +185,9 @@ const RemoteVehicleControl = () => {
       </div>
 
       <div className="relative max-w-7xl mx-auto p-8">
-        <div className="grid grid-cols-1 xl:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
           {/* Video Stream - Takes up more space */}
-          <div className="xl:col-span-3">
+          <div className="lg:col-span-3">
             <div className="bg-gradient-to-br from-slate-900/80 via-slate-800/80 to-slate-900/80 backdrop-blur-xl rounded-3xl p-8 border border-cyan-500/20 shadow-2xl">
               <div className="flex items-center justify-between mb-8">
                 <div className="flex items-center space-x-3">
@@ -211,12 +212,12 @@ const RemoteVehicleControl = () => {
                 </div>
               </div>
               
-              <div className="relative bg-black/60 rounded-2xl overflow-hidden aspect-video border border-cyan-500/10 shadow-inner">
+              <div className="relative bg-black/60 rounded-2xl overflow-hidden aspect-square md:aspect-video border border-cyan-500/10 shadow-inner">
                 {videoStream ? (
                   <img 
                     src={videoStream} 
                     alt="ESP32-CAM Live Stream" 
-                    className="w-full h-full object-contain"
+                    className="w-full h-full object-cover"
                   />
                 ) : (
                   <div className="absolute inset-0 flex items-center justify-center">
