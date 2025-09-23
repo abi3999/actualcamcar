@@ -1,9 +1,9 @@
 import React from 'react';
-import StreamViewer from './components/StreamViewer';
+import WebcamViewer from './components/WebcamViewer';
 
 function App() {
   return (
-    <StreamViewer />
+    <WebcamViewer />
   );
 }
 
