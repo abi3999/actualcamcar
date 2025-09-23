@@ -23,6 +23,14 @@ const StreamViewer: React.FC<StreamViewerProps> = () => {
     ]
   };
 
+  // Helper function to construct WebSocket URLs for webcontainer environment
+  const getWebSocketUrl = (port: number, path: string): string => {
+    const hostname = window.location.hostname;
+    // In webcontainer, replace the current port with the service port
+    const wsHostname = hostname.replace(/--\d+--/, `--${port}--`);
+    return `ws://${wsHostname}${path}`;
+  };
+
   const connectToStream = async () => {
     if (!broadcastId.trim()) {
       setError('Please enter a valid Broadcast ID');
@@ -51,7 +59,7 @@ const StreamViewer: React.FC<StreamViewerProps> = () => {
     return new Promise(async (resolve, reject) => {
       try {
         // Create WebSocket signaling connection
-        const signalingWs = new WebSocket(`ws://localhost:8080/signaling/viewer/${broadcastId}`);
+        const signalingWs = new WebSocket(getWebSocketUrl(8080, `/signaling/viewer/${broadcastId}`));
         
         signalingWs.onopen = () => {
           console.log('Signaling WebSocket connected');
@@ -148,7 +156,7 @@ const StreamViewer: React.FC<StreamViewerProps> = () => {
   const connectWebSocket = async (): Promise<void> => {
     return new Promise((resolve, reject) => {
       try {
-        const ws = new WebSocket(`ws://localhost:8081/stream/${broadcastId}`);
+        const ws = new WebSocket(getWebSocketUrl(8081, `/stream/${broadcastId}`));
         websocketRef.current = ws;
 
         ws.onopen = () => {
