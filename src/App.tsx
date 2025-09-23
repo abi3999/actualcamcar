@@ -1,9 +1,9 @@
 import React from 'react';
-import RemoteVehicleControl from './pages/Index';
+import StreamViewer from './components/StreamViewer';
 
 function App() {
   return (
-    <RemoteVehicleControl />
+    <StreamViewer />
   );
 }
 
