@@ -10,6 +10,7 @@ const StreamViewer: React.FC<StreamViewerProps> = () => {
   const [error, setError] = useState<string | null>(null);
   const [viewerCount, setViewerCount] = useState(0);
   const [streamQuality, setStreamQuality] = useState<'HD' | 'SD' | 'LOW'>('HD');
+  const [isDemoMode, setIsDemoMode] = useState(false);
   
   const videoRef = useRef<HTMLVideoElement>(null);
   const peerConnectionRef = useRef<RTCPeerConnection | null>(null);
