@@ -358,7 +358,17 @@ const StreamViewer: React.FC<StreamViewerProps> = () => {
               <AlertCircle className="w-6 h-6 text-red-400 flex-shrink-0" />
               <div>
                 <h3 className="font-bold text-red-300 mb-1">Connection Error</h3>
-                <p className="text-red-200/80">{error}</p>
+                <p className="text-red-200/80 text-sm leading-relaxed">{error}</p>
+                {error.includes('backend services') && (
+                  <div className="mt-4 p-4 bg-slate-800/50 rounded-xl border border-slate-600/30">
+                    <h4 className="text-cyan-300 font-semibold mb-2">To enable live streaming:</h4>
+                    <ul className="text-slate-300 text-sm space-y-1">
+                      <li>• Set up a WebRTC signaling server on port 8080</li>
+                      <li>• Set up a WebSocket streaming server on port 8081</li>
+                      <li>• Ensure both servers handle the expected message formats</li>
+                    </ul>
+                  </div>
+                )}
               </div>
             </div>
             <button
