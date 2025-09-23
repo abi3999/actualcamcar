@@ -51,7 +51,7 @@ const StreamViewer: React.FC<StreamViewerProps> = () => {
     return new Promise(async (resolve, reject) => {
       try {
         // Create WebSocket signaling connection
-        const signalingWs = new WebSocket(`wss://stream-signaling.example.com/viewer/${broadcastId}`);
+        const signalingWs = new WebSocket(`ws://localhost:8080/signaling/viewer/${broadcastId}`);
         
         signalingWs.onopen = () => {
           console.log('Signaling WebSocket connected');
@@ -148,7 +148,7 @@ const StreamViewer: React.FC<StreamViewerProps> = () => {
   const connectWebSocket = async (): Promise<void> => {
     return new Promise((resolve, reject) => {
       try {
-        const ws = new WebSocket(`wss://stream-server.example.com/stream/${broadcastId}`);
+        const ws = new WebSocket(`ws://localhost:8081/stream/${broadcastId}`);
         websocketRef.current = ws;
 
         ws.onopen = () => {
